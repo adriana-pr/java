@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="lab1.Variant3Test" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-09-21T05:13:54" hostname="MacBook-Pro-MAC.local" time="0.01">
+  <properties/>
+  <testcase name="negativeMatrixTest[0]([I@659499f1, 4, -2)" classname="lab1.Variant3Test" time="0.01"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
