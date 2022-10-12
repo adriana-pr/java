@@ -1,0 +1,2 @@
+Workout{id= 1 name= йога price= 0.0 date= null time= null }
+Workout{id= 2 name= пілатес price= 0.0 date= null time= null }

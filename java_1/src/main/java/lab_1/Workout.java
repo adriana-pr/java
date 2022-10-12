@@ -9,6 +9,26 @@ public class Workout {
     private String date;
     private String time;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     public String getName() {
         return name;
     }
@@ -29,6 +49,8 @@ public class Workout {
     public int getId() {
         return id;
     }
+
+
 
     public static class Builder {
         private Workout newWorkout;
@@ -71,7 +93,12 @@ public class Workout {
 
     @Override
     public String toString() {
-        return id + " " + name + " " + price + " " + date + " " + time;
+        return "Workout{"+
+                "id= "+id +
+                " name= " + name +
+                " price= " + price +
+                " date= " + date +
+                " time= " + time+ " }";
     }
 
     @Override

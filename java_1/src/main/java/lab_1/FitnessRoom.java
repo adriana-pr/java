@@ -63,7 +63,12 @@ public class FitnessRoom {
     }
     @Override
     public String toString() {
-        return id + " " + address + " " + phoneNumber + " "+ wotkouts + " " + coachs ;
+        return "Coach{"+
+                "id= "+id +
+                " address= " + address +
+                " phoneNumber= " + phoneNumber +
+                " wotkouts= " + wotkouts +
+                " coachs= " + coachs+ " }";
     }
 
     @Override
