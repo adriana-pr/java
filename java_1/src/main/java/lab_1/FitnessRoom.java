@@ -3,7 +3,7 @@ package lab_1;
 import java.util.List;
 import java.util.Objects;
 
-public class FitnessRoom {
+public class FitnessRoom{
     private int id;
     private String address;
     private String phoneNumber;
@@ -60,6 +60,9 @@ public class FitnessRoom {
             newFitnessRoom.phoneNumber = phoneNumber;
             return this;
         }
+        public FitnessRoom build() {
+            return newFitnessRoom;
+        }
     }
     @Override
     public String toString() {
@@ -70,6 +73,7 @@ public class FitnessRoom {
                 " wotkouts= " + wotkouts +
                 " coachs= " + coachs+ " }";
     }
+
 
     @Override
     public boolean equals(Object o) {

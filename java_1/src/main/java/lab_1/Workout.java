@@ -1,13 +1,28 @@
 package lab_1;
 
-import java.util.Objects;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
+import lab_2.TXTSerializer;
 
-public class Workout {
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Objects;
+import java.util.Set;
+
+public class Workout implements TXTSerializer<Workout>,Comparable<Workout> {
+    @Min(value = 0, message = "but id must be more than 0")
     private int id;
+    @Size(min = 3, max=70, message = "but length name must be between 3 and 70")
+
     private String name;
+//    assert (price > 0) : "Price should be more than zero";
     private float price;
-    private String date;
-    private String time;
+    private LocalDate date;
+    private LocalTime time;
 
     public void setId(int id) {
         this.id = id;
@@ -21,11 +36,11 @@ public class Workout {
         this.price = price;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
@@ -37,11 +52,11 @@ public class Workout {
         return price;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public String getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
@@ -50,6 +65,15 @@ public class Workout {
         return id;
     }
 
+    @Override
+    public int compareTo(Workout o) {
+        if (this.name.compareTo(o.name) != 0) {
+            return this.name.compareTo(o.name);
+        }
+        else {
+            return (int) (this.price - o.price);
+        }
+    }
 
 
     public static class Builder {
@@ -71,22 +95,36 @@ public class Workout {
         }
 
         public Builder setPrice(float price) {
-            assert (price > 0) : "Price should be more than zero";
             newWorkout.price = price;
             return this;
         }
 
-        public Builder setDate(String date) {
+        public Builder setDate(LocalDate date) {
             newWorkout.date = date;
             return this;
         }
 
-        public Builder setTime(String time) {
+        public Builder setTime(LocalTime time) {
             newWorkout.time = time;
             return this;
         }
 
         public Workout build() {
+            ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+            Validator validator = factory.getValidator();
+
+            Set<ConstraintViolation<Workout>> violations = validator.validate(newWorkout);
+            StringBuilder errors = new StringBuilder();
+            for(ConstraintViolation<Workout> violation:violations){
+                errors.append(violation.getPropertyPath()+" = "+violation.getInvalidValue()+" - "+violation.getMessage());
+            }
+            if(!errors.isEmpty()){
+                try {
+                    throw  new IllegalAccessException(errors.toString());
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
             return newWorkout;
         }
     }
@@ -94,11 +132,37 @@ public class Workout {
     @Override
     public String toString() {
         return "Workout{"+
-                "id= "+id +
-                " name= " + name +
-                " price= " + price +
-                " date= " + date +
-                " time= " + time+ " }";
+                " id="+id +
+                ", name=" + name +
+                ", price=" + price +
+                ", date=" + date +
+                ", time=" + time+ ", }";
+    }
+
+    public String toStringTXT() {
+        return "{ "+
+                " id="+id +
+                ", name=" + name +
+                ", price=" + price +
+                ", date=" + date +
+                ", time=" + time+ ", }";
+    }
+
+    public Workout fromStringTXT( String line,Class<Workout> generic) {
+        String[] valueFromTXT = line.split(" ");
+        String[] value = new String[valueFromTXT.length];
+        int i=0;
+        for(String v : valueFromTXT){
+            if(v.indexOf('=')!=-1)
+                value[i++]=v.substring(v.indexOf('=')+1,v.indexOf(','));
+        }
+        Workout workout = new Workout();
+        workout.id= Integer.parseInt(value[0]);
+        workout.name = value[1];
+        workout.price = Float.parseFloat(value[2]);
+        workout.date = LocalDate.parse(value[3]);
+        workout.time = LocalTime.parse(value[4]);
+        return workout;
     }
 
     @Override
@@ -122,4 +186,5 @@ public class Workout {
     public int hashCode() {
         return Objects.hash(id, name, price, time);
     }
+    
 }

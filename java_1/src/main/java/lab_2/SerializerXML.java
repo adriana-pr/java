@@ -45,17 +45,5 @@ public class SerializerXML<T> implements Serializer<T>  {
             throw new RuntimeException(e);
         }
     }
-    public static void main(String[] args) {
-        SerializerXML p = new SerializerXML();
-//    List<Workout> ws= new ArrayList<Workout>();
-//        Workout w  = new Workout.Builder().setId(1).setName("йога").build();
-//        Workout w1 = new Workout.Builder().setId(2).setName("пілатес").build();
-//        ws.add(w);
-//        ws.add(w1);
-//    p.toFile("file/workoutList1.json", w);
-//        Object w;
-//        w = p.readFile("file/workout1.json");
-        System.out.println(p.readFile("file/workout1.json"));
-    }
 
 }

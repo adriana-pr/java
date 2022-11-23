@@ -1,1 +1,1 @@
-Workout{id= 1 name= йога price= 0.0 date= null time= null }
+{ id=1, name=йога, price=0.0, date=null, time=null, }
