@@ -11,30 +11,32 @@ import java.util.stream.Collectors;
 
 public class ServiceMethodsStream {
 
+    private FitnessRoom fitnessRoom;
     private Comparator comparatorWorkout;
     private Comparator comparatorCoach;
 
-    public ServiceMethodsStream(){
-        comparatorWorkout = new ComparatorWorkout();
-        comparatorCoach = new ComparatorCoach();
-
+    public ServiceMethodsStream(FitnessRoom fitnessRoom) {
+        this.fitnessRoom = fitnessRoom;
+        this.comparatorWorkout = new ComparatorWorkout();
+        this.comparatorCoach = new ComparatorCoach();
     }
 
-    public List<Workout> findNameWorkoutStream(String nameWorkout, FitnessRoom fitnessRoom ){
-        return (List<Workout>) fitnessRoom.getWotkouts().stream().filter(
-                workout -> workout.getName()== nameWorkout).sorted(comparatorWorkout).collect(Collectors.toList());
+
+    public List<Workout> findWorkoutByNameStream(String nameWorkout){
+        return fitnessRoom.getWorkouts().stream().filter(
+                workout -> workout.getName().contains(nameWorkout)).collect(Collectors.toList());
     }
-    public List<Coach> findNameCoachStream(String nameWorkout, FitnessRoom fitnessRoom ){
+    public List<Coach> findCoachByNameStream(String nameWorkout){
         return fitnessRoom.getCoachs().stream().filter(
-                coach -> coach.getWorkout()== nameWorkout).sorted().collect(Collectors.toList());
+                coach -> coach.getWorkout()== nameWorkout).collect(Collectors.toList());
     }
-    public List<Workout> findPriceAboveStream(float price, FitnessRoom fitnessRoom ){
-        return (List<Workout>) fitnessRoom.getWotkouts().stream().filter(
-                workout -> workout.getPrice()>= price).sorted(comparatorWorkout).collect(Collectors.toList());
+    public List<Workout> findPriceAboveStream(float price ){
+        return fitnessRoom.getWorkouts().stream().filter(
+                workout -> workout.getPrice()>= price).collect(Collectors.toList());
     }
-    public List<Workout> findPriceBelonStream(float price, FitnessRoom fitnessRoom ){
-        return  fitnessRoom.getWotkouts().stream().filter(
-                workout -> workout.getPrice()<= price).sorted().collect(Collectors.toList());
+    public List<Workout> findPriceBelowStream(float price){
+        return  fitnessRoom.getWorkouts().stream().filter(
+                workout -> workout.getPrice()<= price).collect(Collectors.toList());
     }
 
 

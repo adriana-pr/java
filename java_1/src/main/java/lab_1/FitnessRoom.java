@@ -3,11 +3,11 @@ package lab_1;
 import java.util.List;
 import java.util.Objects;
 
-public class FitnessRoom{
+public class FitnessRoom {
     private int id;
     private String address;
     private String phoneNumber;
-    private List<Workout> wotkouts;
+    private List<Workout> workouts;
     private List<Coach> coachs;
 
     public int getId() {
@@ -18,8 +18,8 @@ public class FitnessRoom{
         return address;
     }
 
-    public List<Workout> getWotkouts() {
-        return wotkouts;
+    public List<Workout> getWorkouts() {
+        return workouts;
     }
 
     public List<Coach> getCoachs() {
@@ -42,13 +42,14 @@ public class FitnessRoom{
             newFitnessRoom.id = id;
             return this;
         }
+
         public Builder setAddress(String address) {
             newFitnessRoom.address = address;
             return this;
         }
 
         public Builder setWotkouts(List<Workout> wotkouts) {
-            newFitnessRoom.wotkouts = wotkouts;
+            newFitnessRoom.workouts = wotkouts;
             return this;
         }
 
@@ -56,22 +57,25 @@ public class FitnessRoom{
             newFitnessRoom.coachs = coachs;
             return this;
         }
+
         public Builder setPhoneNumber(String phoneNumber) {
             newFitnessRoom.phoneNumber = phoneNumber;
             return this;
         }
+
         public FitnessRoom build() {
             return newFitnessRoom;
         }
     }
+
     @Override
     public String toString() {
-        return "Coach{"+
-                "id= "+id +
+        return "Coach{" +
+                "id= " + id +
                 " address= " + address +
                 " phoneNumber= " + phoneNumber +
-                " wotkouts= " + wotkouts +
-                " coachs= " + coachs+ " }";
+                " wotkouts= " + workouts +
+                " coachs= " + coachs + " }";
     }
 
 

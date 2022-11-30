@@ -3,7 +3,6 @@ package TestLab_3;
 import lab_1.Coach;
 import lab_1.FitnessRoom;
 import lab_1.Workout;
-import lab_3.ServiceMethods;
 import lab_3.ServiceMethodsStream;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -31,26 +30,26 @@ public class TestServiceMethodsStream {
     }
 
     @Test
-    public void findNameWorkoutStreamTest(){
-        List<Workout> actual =  new ServiceMethodsStream().findNameWorkoutStream("йога",fitnessRoom);
-        List <Workout> expected = List.of(workout3,workout1);
+    public void findWorkoutByNameStreamTest(){
+        List<Workout> actual =  new ServiceMethodsStream(fitnessRoom).findWorkoutByNameStream("й");
+        List <Workout> expected = List.of(workout1,workout3);
         assertEquals(expected,actual);
     }
     @Test
-    public void ffindPriceAboveStreamTest(){
-        List<Workout> actual =  new ServiceMethodsStream().findPriceAboveStream(240,fitnessRoom);
-        List <Workout> expected = List.of(workout3,workout4,workout1);
+    public void findPriceAboveStreamTest(){
+        List<Workout> actual =  new ServiceMethodsStream(fitnessRoom).findPriceAboveStream(240);
+        List <Workout> expected = List.of(workout1,workout3,workout4);
         assertEquals(expected,actual);
     }
     @Test
-    public void findPriceBelonStreamTest(){
-        List<Workout> actual =  new ServiceMethodsStream().findPriceBelonStream(270,fitnessRoom);
-        List <Workout> expected = List.of(workout3,workout2);
+    public void findPriceBelowStreamTest(){
+        List<Workout> actual =  new ServiceMethodsStream(fitnessRoom).findPriceBelowStream(270);
+        List <Workout> expected = List.of(workout2,workout3);
         assertEquals(expected,actual);
     }
     @Test
-    public void findNameCoachStreamTest(){
-        List<Coach> actual =  new ServiceMethodsStream().findNameCoachStream("пілатес",fitnessRoom);
+    public void findCoachByNameStreamTest(){
+        List<Coach> actual =  new ServiceMethodsStream(fitnessRoom).findCoachByNameStream("пілатес");
         List <Coach> expected = List.of(coach2);
         assertEquals(expected,actual);
     }

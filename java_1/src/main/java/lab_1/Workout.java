@@ -14,12 +14,11 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Workout implements TXTSerializer<Workout>,Comparable<Workout> {
-    @Min(value = 0, message = "but id must be more than 0")
+    @Min(value = 1, message = "but id must be more than 0")
     private int id;
     @Size(min = 3, max=70, message = "but length name must be between 3 and 70")
 
     private String name;
-//    assert (price > 0) : "Price should be more than zero";
     private float price;
     private LocalDate date;
     private LocalTime time;
@@ -186,5 +185,5 @@ public class Workout implements TXTSerializer<Workout>,Comparable<Workout> {
     public int hashCode() {
         return Objects.hash(id, name, price, time);
     }
-    
+
 }

@@ -31,26 +31,26 @@ public class TestServiceMethods {
     }
 
     @Test
-    public void findNameWorkoutTest(){
-        List<Workout> actual =  new ServiceMethods().findNameWorkout("йога",fitnessRoom);
+    public void findWorkoutByNameTest(){
+        List<Workout> actual =  new ServiceMethods(fitnessRoom).findWorkoutByName("йо");
         List <Workout> expected = List.of(workout3,workout1);
         assertEquals(expected,actual);
     }
     @Test
     public void findPriceAboveTest(){
-        List<Workout> actual =  new ServiceMethods().findPriceAbove(240,fitnessRoom);
+        List<Workout> actual =  new ServiceMethods(fitnessRoom).findPriceAbove(240);
         List <Workout> expected = List.of(workout3,workout4,workout1);
         assertEquals(expected,actual);
     }
     @Test
-    public void findPriceBelonTest(){
-        List<Workout> actual =  new ServiceMethods().findPriceBelon(270,fitnessRoom);
+    public void findPriceBelowTest(){
+        List<Workout> actual =  new ServiceMethods(fitnessRoom).findPriceBelow(270);
         List <Workout> expected = List.of(workout3,workout2);
         assertEquals(expected,actual);
     }
     @Test
-    public void findNameCoachTest(){
-        List<Coach> actual =  new ServiceMethods().findNameCoach("пілатес",fitnessRoom);
+    public void findCoachByNameTest(){
+        List<Coach> actual =  new ServiceMethods(fitnessRoom).findCoachByName("пілатес");
         List <Coach> expected = List.of(coach2);
         assertEquals(expected,actual);
     }

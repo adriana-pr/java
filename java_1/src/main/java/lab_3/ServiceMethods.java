@@ -7,55 +7,61 @@ import lab_1.Workout;
 import java.util.*;
 
 public class ServiceMethods {
+    private FitnessRoom fitnessRoom;
     private Comparator comparatorWorkout;
     private Comparator comparatorCoach;
-    public ServiceMethods(){
-         comparatorWorkout = new ComparatorWorkout();
-         comparatorCoach = new ComparatorCoach();
 
+    public ServiceMethods(FitnessRoom fitnessRoom) {
+        this.fitnessRoom = fitnessRoom;
+        this.comparatorWorkout = new ComparatorWorkout();
+        this.comparatorCoach = new ComparatorCoach();
     }
 
-    public List<Workout> findNameWorkout(String nameWorkout, FitnessRoom fitnessRoom ){
-        List<Workout> wotkouts = new ArrayList<>();
-        for(Workout workout : fitnessRoom.getWotkouts()){
-            if(nameWorkout==workout.getName())
-            {
-                wotkouts.add(workout);
+
+
+    public List<Workout> findWorkoutByName(String nameWorkout) {
+        List<Workout> workouts = new ArrayList<>();
+        for (Workout workout : fitnessRoom.getWorkouts()) {
+            if (workout.getName().contains(nameWorkout)) {
+                workouts.add(workout);
 
             }
         }
-        Collections.sort(wotkouts, comparatorWorkout);
-        return wotkouts;
+        Collections.sort(workouts, comparatorWorkout);
+        return workouts;
     }
-    public List<Coach> findNameCoach(String nameWorkout, FitnessRoom fitnessRoom ){
+
+    public List<Coach> findCoachByName(String nameWorkout) {
         List<Coach> coachs = new ArrayList<>();
-        for(Coach coach : fitnessRoom.getCoachs()){
-            if(nameWorkout==coach.getWorkout()){
+        for (Coach coach : fitnessRoom.getCoachs()) {
+            if (nameWorkout == coach.getWorkout()) {
                 coachs.add(coach);
             }
         }
         Collections.sort(coachs, comparatorCoach);
         return coachs;
     }
-    public List<Workout> findPriceAbove(float price, FitnessRoom fitnessRoom ){
-        List<Workout> wotkouts = new ArrayList<>();
-        for(Workout workout : fitnessRoom.getWotkouts()){
-            if(price<=workout.getPrice()){
-                wotkouts.add(workout);
+
+    public List<Workout> findPriceAbove(float price) {
+        List<Workout> workouts = new ArrayList<>();
+        for (Workout workout : fitnessRoom.getWorkouts()) {
+            if (price <= workout.getPrice()) {
+                workouts.add(workout);
             }
         }
-        Collections.sort(wotkouts, comparatorWorkout);
-        return wotkouts;
+        Collections.sort(workouts, comparatorWorkout);
+        return workouts;
     }
-    public List<Workout> findPriceBelon(float price, FitnessRoom fitnessRoom ){
-        List<Workout> wotkouts = new ArrayList<>();
-        for(Workout workout : fitnessRoom.getWotkouts()){
-            if(price>=workout.getPrice()){
-                wotkouts.add(workout);
+
+    public List<Workout> findPriceBelow(float price) {
+        List<Workout> workouts = new ArrayList<>();
+        for (Workout workout : fitnessRoom.getWorkouts()) {
+            if (price >= workout.getPrice()) {
+                workouts.add(workout);
             }
         }
-        Collections.sort(wotkouts);
-        return wotkouts;
+        Collections.sort(workouts);
+        return workouts;
     }
 
 }
