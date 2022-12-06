@@ -62,7 +62,7 @@ public class DataBaseConnection {
         Connection connection = getConnection();
         Statement statement = connection.createStatement();
         ){
-            String dropCoach = "DROP TABLE IF EXISTS coach";
+            String dropCoach = "DROP TABLE IF EXISTS coaches";
             statement.execute(dropCoach);
         }
     }
@@ -71,7 +71,7 @@ public class DataBaseConnection {
         Connection connection = getConnection();
         Statement statement = connection.createStatement();
         ){
-            String dropWorkout = "DROP TABLE IF EXISTS workout";
+            String dropWorkout = "DROP TABLE IF EXISTS workouts";
             statement.execute(dropWorkout);
         }
 
