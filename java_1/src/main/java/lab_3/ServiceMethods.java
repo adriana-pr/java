@@ -33,7 +33,7 @@ public class ServiceMethods {
 
     public List<Coach> findCoachByName(String nameWorkout) {
         List<Coach> coachs = new ArrayList<>();
-        for (Coach coach : fitnessRoom.getCoachs()) {
+        for (Coach coach : fitnessRoom.getCoaches()) {
             if (nameWorkout == coach.getWorkout()) {
                 coachs.add(coach);
             }

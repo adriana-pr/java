@@ -8,7 +8,7 @@ public class FitnessRoom {
     private String address;
     private String phoneNumber;
     private List<Workout> workouts;
-    private List<Coach> coachs;
+    private List<Coach> coaches;
 
     public int getId() {
         return id;
@@ -22,8 +22,8 @@ public class FitnessRoom {
         return workouts;
     }
 
-    public List<Coach> getCoachs() {
-        return coachs;
+    public List<Coach> getCoaches() {
+        return coaches;
     }
 
     public String getPhoneNumber() {
@@ -54,7 +54,7 @@ public class FitnessRoom {
         }
 
         public Builder setCoachs(List<Coach> coachs) {
-            newFitnessRoom.coachs = coachs;
+            newFitnessRoom.coaches = coachs;
             return this;
         }
 
@@ -75,7 +75,7 @@ public class FitnessRoom {
                 " address= " + address +
                 " phoneNumber= " + phoneNumber +
                 " wotkouts= " + workouts +
-                " coachs= " + coachs + " }";
+                " coachs= " + coaches + " }";
     }
 
 
