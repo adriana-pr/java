@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class DataBaseConnection {
     static final String jdbcUrl="jdbc:postgresql://localhost:5433/fitnessClub";
     static final String user="postgres";
-    static final String password="adriana00";
+    static final String password="12345678";
 
     public static Connection getConnection(){
         Connection connection =null;
