@@ -34,7 +34,7 @@ public class ServiceMethods {
     public List<Coach> findCoachByName(String nameWorkout) {
         List<Coach> coachs = new ArrayList<>();
         for (Coach coach : fitnessRoom.getCoaches()) {
-            if (nameWorkout == coach.getWorkout()) {
+            if (nameWorkout == coach.getWorkout().getName()) {
                 coachs.add(coach);
             }
         }

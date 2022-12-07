@@ -23,8 +23,8 @@ public class TestServiceMethodsStream {
         workout3 = new Workout.Builder().setId(3).setName("йога").setPrice(250).build();
         workout4 = new Workout.Builder().setId(4).setName("карате").setPrice(300).build();
 
-        coach1 = new Coach.Builder().setId(1).setFullName("Ivan").setWorkout("йога").build();
-        coach2 = new Coach.Builder().setId(2).setFullName("Petro").setWorkout("пілатес").build();
+        coach1 = new Coach.Builder().setId(1).setFullName("Ivan").setWorkout(workout1).build();
+        coach2 = new Coach.Builder().setId(2).setFullName("Petro").setWorkout(workout2).build();
 
         fitnessRoom = new FitnessRoom.Builder().setWotkouts(List.of(workout1,workout2,workout3,workout4)).setCoachs(List.of(coach1,coach2)).build();
     }

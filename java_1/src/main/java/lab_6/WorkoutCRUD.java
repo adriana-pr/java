@@ -9,32 +9,54 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutCRUD {
-    private static String insertWorkout = "INSERT INTO workouts (id,name_workout,price,date)" +
-            "VALUES (?, ?, ?,?);";
-    private static String updateWorkout = "UPDATE workouts SET price = ? WHERE id =?";
-    private static String deleteWorkout = "DELETE FROM workouts WHERE id =?";
 
-    public static List<Workout> saveWorkout(Workout workout){
+    private static String getWorkoutById = "SELECT * FROM workouts WHERE id =?;";
+    private static String getWorkout = "SELECT * FROM workouts;";
+    private static String insertWorkout = "INSERT INTO workouts (name_workout,price,date)" +
+            "VALUES (?, ?,?);";
+    private static String updateWorkout = "UPDATE workouts SET price = ? WHERE id =?;";
+    private static String deleteWorkout = "DELETE FROM workouts WHERE id =?;";
+
+    public static void saveWorkout(Workout workout){
         try(Connection connection = DataBaseConnection.getConnection();
             PreparedStatement prepareStatement = connection.prepareStatement(insertWorkout);
         ) {
-            prepareStatement.setInt(1, workout.getId());
-            prepareStatement.setString(2, workout.getName());
-            prepareStatement.setFloat(3, workout.getPrice());
-            prepareStatement.setDate(4, Date.valueOf(workout.getDate()));
+//            prepareStatement.setInt(1, workout.getId());
+            prepareStatement.setString(1, workout.getName());
+            prepareStatement.setFloat(2, workout.getPrice());
+            prepareStatement.setDate(3, Date.valueOf(workout.getDate()));
 //            prepareStatement.setTime(5, Time.valueOf(workout.getTime()));
             prepareStatement.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        List<Workout> workouts  = getWorkoutData("SELECT * FROM workouts;");
-        return workouts;
     }
-    public static List<Workout> getWorkoutData(String query){
+    public static Workout getWorkoutById(int workoutId){
+        Workout workout = new Workout();
+        try(Connection connection = DataBaseConnection.getConnection();
+            PreparedStatement prepareStatement = connection.prepareStatement(getWorkoutById);
+        ) {
+            prepareStatement.setInt(1, workoutId);
+            ResultSet result = prepareStatement.executeQuery();
+            while(result.next()){
+                workout.setId(result.getInt("id"));
+                workout.setName(result.getString("name_workout"));
+                workout.setPrice(result.getFloat("price"));
+                workout.setDate(result.getDate("date").toLocalDate());
+//                LocalTime time = result.getTime("duration").toLocalTime();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return workout;
+    }
+
+    public static List<Workout> getWorkoutData(){
         List<Workout> workouts = new ArrayList<>();
         try(Connection connection = DataBaseConnection.getConnection();
-            PreparedStatement prepareStatement = connection.prepareStatement(query);
+            PreparedStatement prepareStatement = connection.prepareStatement(getWorkout);
         ) {
             ResultSet result = prepareStatement.executeQuery();
             while(result.next()){
@@ -53,7 +75,7 @@ public class WorkoutCRUD {
         return workouts;
     }
 
-    public static List<Workout> updateWorkout(int workoutId, Float price){
+    public static void updateWorkout(int workoutId, Float price){
         try(Connection connection = DataBaseConnection.getConnection();
             PreparedStatement prepareStatement = connection.prepareStatement(updateWorkout);
         ) {
@@ -64,11 +86,9 @@ public class WorkoutCRUD {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        List<Workout> workouts = getWorkoutData("SELECT * FROM workouts;");
-        return workouts;
     }
 
-    public static List<Workout> deleteWorkout(int workoutId){
+    public static void deleteWorkout(int workoutId){
         try(Connection connection = DataBaseConnection.getConnection();
             PreparedStatement prepareStatement = connection.prepareStatement(deleteWorkout);
         ) {
@@ -79,7 +99,5 @@ public class WorkoutCRUD {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        List<Workout> workouts = getWorkoutData("SELECT * FROM workouts;");
-        return workouts;
     }
 }

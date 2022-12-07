@@ -26,7 +26,7 @@ public class DataBaseConnection {
              Statement statement = connection.createStatement();
              ){
             String tableWorkout =" CREATE TABLE workouts" +
-                    "( id integer PRIMARY KEY," +
+                    "( id serial PRIMARY KEY," +
                     " name_workout varchar(100)," +
                     " price FLOAT," +
                     " date date ," +
@@ -44,11 +44,12 @@ public class DataBaseConnection {
                Statement statement = connection.createStatement();
                ){
             String tableCoach =" CREATE TABLE coaches" +
-                    "( id integer PRIMARY KEY," +
-                    " fullName_coach varchar(150)," +
+                    "( id serial PRIMARY KEY," +
+                    " full_name_coach varchar(150)," +
                     " phone_number varchar(13) UNIQUE," +
                     " address varchar(100)," +
-                    " workout varchar(100) )";
+                    " workout integer NOT NULL," +
+                    "FOREIGN KEY(workout) REFERENCES workouts (id) )";
             statement.execute(tableCoach);
 
 

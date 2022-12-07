@@ -22,7 +22,7 @@ public class Coach implements TXTSerializer<Coach>{
     @Pattern(regexp = "^\\+(\\d[()]?){12}$", message = "Phone number is incorrect")
     private String phoneNumber;
     private String address;
-    private String workout;
+    private Workout workout;
 
     public int getId() {
         return id;
@@ -40,11 +40,29 @@ public class Coach implements TXTSerializer<Coach>{
         return address;
     }
 
-    public String getWorkout() {
+    public Workout getWorkout() {
         return workout;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setWorkout(Workout workout) {
+        this.workout = workout;
+    }
 
 
     public static class Builder {
@@ -76,7 +94,7 @@ public class Coach implements TXTSerializer<Coach>{
             return this;
         }
 
-        public Builder setWorkout(String workout) {
+        public Builder setWorkout(Workout workout) {
             newCoach.workout = workout;
             return this;
         }
@@ -118,6 +136,7 @@ public class Coach implements TXTSerializer<Coach>{
                 ", address=" + address +
                 ", workout=" + workout+ ", }";
     }
+    private Class<Workout> getClass;
     public Coach fromStringTXT( String line,Class<Coach> generic) {
         String[] valueFromTXT = line.split(",");
         String[] value = new String[valueFromTXT.length];
@@ -131,7 +150,7 @@ public class Coach implements TXTSerializer<Coach>{
         coach.fullName = value[1];
         coach.phoneNumber = value[2];
         coach.address = value[3];
-        coach.workout = value[4];
+        coach.workout = new Workout().fromStringTXT(value[4],getClass);
         return coach;
     }
     @Override

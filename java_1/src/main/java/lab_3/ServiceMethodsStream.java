@@ -28,7 +28,7 @@ public class ServiceMethodsStream {
     }
     public List<Coach> findCoachByNameStream(String nameWorkout){
         return fitnessRoom.getCoaches().stream().filter(
-                coach -> coach.getWorkout()== nameWorkout).collect(Collectors.toList());
+                coach -> coach.getWorkout().getName()== nameWorkout).collect(Collectors.toList());
     }
     public List<Workout> findPriceAboveStream(float price ){
         return fitnessRoom.getWorkouts().stream().filter(

@@ -7,13 +7,13 @@ import lab_2.SerializerTXT;
 import lab_2.SerializerXML;
 import org.testng.annotations.Test;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 public class TestLab_2 {
     private String fileContent(String fileName){
@@ -93,7 +93,7 @@ public class TestLab_2 {
     @Test
     public void  readFileTestTXT() throws Exception{
         SerializerTXT<Workout> serializer = new SerializerTXT<>(Workout.class);
-        serializer.readFileList("file/workout.txt");
+        serializer.readFile("file/workout.txt");
     }
 }
 

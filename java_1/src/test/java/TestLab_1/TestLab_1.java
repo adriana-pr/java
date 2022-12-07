@@ -8,10 +8,6 @@ import static org.testng.AssertJUnit.assertEquals;
 
 
 public class TestLab_1 {
-    @Test(expectedExceptions = AssertionError.class)
-    public void priseWorkoutNegTest(){
-        new Workout.Builder().setPrice(-200).build();
-    }
 
     @Test
     public void equalTest(){

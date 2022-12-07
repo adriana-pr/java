@@ -1,10 +1,6 @@
 package lab_2;
 
-import lab_1.Coach;
-import lab_1.Workout;
-
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -58,5 +54,6 @@ public class SerializerTXT<T extends  TXTSerializer> implements Serializer<T>  {
             }
             return objList;
     }
+
 
 }
